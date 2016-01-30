@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour{
-    public GameObject itemMenu;
+    public ItemListUIBehaviour itemListUI;
+    public CurrentItemUIBehaviour currItemUI;
 
     void Start() {
 
     }
 
     public void BringUpItems(bool expression) {
-        itemMenu.SetActive(expression);
+        if (itemListUI == null) return;
+        itemListUI.gameObject.SetActive(expression);
+        itemListUI.Populate();
     }
 }

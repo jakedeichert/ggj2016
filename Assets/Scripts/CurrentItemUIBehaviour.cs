@@ -7,14 +7,15 @@ public class CurrentItemUIBehaviour : MonoBehaviour {
     public Image backImage;
     public Image frontImage;
     public InventoryBehaviour inventoryBehav;
+    public ItemDatabase itemDatabase;
 
     void Start() {
         
     }
 
     void Update() {
-        if (inventoryBehav != null && backImage != null && frontImage != null) {
-            Debug.Log(inventoryBehav.CurrItemIndex);
+        if (inventoryBehav != null && backImage != null && frontImage != null && itemDatabase != null) {
+            frontImage.sprite = itemDatabase.FindItemSprite(inventoryBehav.CurrItemIndex);
         }
     }
 }

@@ -2,11 +2,15 @@
 using System.Collections;
 
 [RequireComponent(typeof(HittableBehaviour))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerBehaviour : MonoBehaviour {
     public float speed = 10;
     public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
+    public UIController uiController;
+
     private HittableBehaviour hittable;
     private InventoryBehaviour inventory;
     private Rigidbody2D rigidbody2D;
@@ -41,9 +45,9 @@ public class PlayerBehaviour : MonoBehaviour {
         }
 
         if (Input.GetKey(KeyCode.LeftShift)) {
-            SendMessage("BringUpItems", true);
-        } else {
-            SendMessage("BringUpItems", false);
+            uiController.BringUpItems(true);
+        } else if (Input.GetKeyUp(KeyCode.LeftShift)) {
+            uiController.BringUpItems(false);
         }
 
         if (weapon != null) {
@@ -67,7 +71,6 @@ public class PlayerBehaviour : MonoBehaviour {
             weapon.transform.position = transform.position + (weaponForward * 4);
         }
 
-        rigidbody2D.AddForce(movement * Time.deltaTime);
         Vector3 newPos = transform.position + movement * Time.deltaTime;
         rigidbody2D.MovePosition(newPos);
         movement.x *= friction;
