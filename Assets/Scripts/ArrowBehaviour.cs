@@ -17,4 +17,9 @@ public class ArrowBehaviour : MonoBehaviour {
             GameObject.Destroy(this.gameObject);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision) {
+        Debug.Log("Hit something!");
+        Destroy(this.gameObject);
+    }
 }

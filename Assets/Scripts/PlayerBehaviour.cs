@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
 	void Start () {
         movement = new Vector3(0,0,0);
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Player"), LayerMask.NameToLayer("Player"));
 	}
 	
 	void Update () {
