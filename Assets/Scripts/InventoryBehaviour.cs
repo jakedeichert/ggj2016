@@ -22,7 +22,7 @@ public class InventoryBehaviour : MonoBehaviour {
     }
 
     void Start() {
-        SelectItem(0);
+        currItemIndex = -1;
     }
 
     public void AddItem(Item item) {
@@ -39,6 +39,10 @@ public class InventoryBehaviour : MonoBehaviour {
         inEntry.item = item;
         inEntry.quantity = 1;
         inventoryList.Add(inEntry);
+        //If this is the first item player gets, select it automatically
+        if (inventoryList.Count == 1) {
+            SelectItem(0);
+        }
     }
 
     public InventoryEntry[] GetInventory() {
@@ -50,12 +54,22 @@ public class InventoryBehaviour : MonoBehaviour {
     }
 
     public void UseItem(int index) {
-        if (index < 0 || index > inventoryList.Count) return;
+        if (index < 0 || index >= inventoryList.Count) return;
         InventoryEntry useEntry = inventoryList[index];
         int useID = useEntry.item.id;
         if (useID == 0 && useEntry.quantity > 0) {
             SendMessage("AddHealth", 10);
             useEntry.quantity--;
+            if (useEntry.quantity <= 0) {
+                RemoveItem(index);
+            }
+        }
+    }
+
+    public void RemoveItem(int index) {
+        inventoryList.RemoveAt(index);
+        if (inventoryList.Count <= 0) {
+            currItemIndex = -1;
         }
     }
 }
