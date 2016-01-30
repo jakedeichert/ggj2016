@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class GameMain : MonoBehaviour {
     public EnemyBehaviour enemyPrefab;
     public GameObject player;
-    public Transform enemiesHolder;
     List<EnemyBehaviour> allEnemies = new List<EnemyBehaviour>();
     int numEnemies = 3;
 
 
     void Start() {
+        GameObject enemiesHolder = new GameObject("enemies");
         // Create enemies.
         for (int i = 0; i < numEnemies; i++) {
             EnemyBehaviour e = Instantiate(enemyPrefab) as EnemyBehaviour;
-            e.transform.parent = enemiesHolder;
+            e.transform.parent = enemiesHolder.transform;
             e.playerTarget = player.transform;
             e.allEnemies = allEnemies;
             allEnemies.Add(e);
