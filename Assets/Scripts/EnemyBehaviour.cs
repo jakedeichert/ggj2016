@@ -1,17 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EnemyBehaviour : MonoBehaviour {
     public Transform playerTarget;
+    public List<EnemyBehaviour> allEnemies;
     Vector2 velocity;
-    bool shouldSeek = true;
+    bool shouldSeek;
     float maxVelocity;
+    float avoidanceRadius;
     float seekDistance;
     float mass;
 
 
 	void Start() {
         velocity = Vector2.zero;
+        shouldSeek = true;
+        avoidanceRadius = 3f;
         maxVelocity = 5.0f;
         seekDistance = 15.0f;
         mass = 20.0f;
@@ -46,16 +51,13 @@ public class EnemyBehaviour : MonoBehaviour {
     Vector2 collisionAvoidance(Vector2 rayOriginOffset, float rayLength, Vector2 dir) {
         Vector2 avoidance = Vector2.zero;
 
-        if (rayLength > 0) {
-            float maxAvoidForce = 3.0f;
-            Ray2D ray = new Ray2D((Vector2)transform.position + rayOriginOffset, dir);
-            Debug.DrawRay(ray.origin, ray.direction * rayLength);
-
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, rayLength);
-            if (hit) {
-                if (hit.collider.name == "skeleton") {
-                    avoidance.x = ray.origin.x + velocity.x - hit.transform.position.x;
-                    avoidance.y = ray.origin.y + velocity.y - hit.transform.position.y;
+        for (int i = 0; i < allEnemies.Count; i++) {
+            if (this != allEnemies[i]) {
+                float distance = Vector2.Distance(transform.position, allEnemies[i].transform.position);
+                if (distance < avoidanceRadius) {
+                    float maxAvoidForce = 3.0f;
+                    avoidance.x = transform.position.x + velocity.x - allEnemies[i].transform.position.x;
+                    avoidance.y = transform.position.y + velocity.y - allEnemies[i].transform.position.y;
                     avoidance.Normalize();
                     avoidance *= maxAvoidForce;
                 }
