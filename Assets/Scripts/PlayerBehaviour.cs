@@ -7,7 +7,6 @@ public class PlayerBehaviour : MonoBehaviour {
     public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
-
     private Vector3 movement;
 
 	void Start () {
