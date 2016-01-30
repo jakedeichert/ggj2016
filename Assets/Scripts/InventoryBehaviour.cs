@@ -8,14 +8,21 @@ public class InventoryEntry {
 }
 
 public class InventoryBehaviour : MonoBehaviour {
-    List<InventoryEntry> inventoryList;
+    private List<InventoryEntry> inventoryList;
+    private int currItemIndex;
+
+    public int CurrItemIndex {
+        get {
+            return currItemIndex;
+        }
+    }
 
     void Awake() {
         inventoryList = new List<InventoryEntry>();
     }
 
     void Start() {
-
+        SelectItem(0);
     }
 
     public void AddItem(Item item) {
@@ -36,6 +43,10 @@ public class InventoryBehaviour : MonoBehaviour {
 
     public InventoryEntry[] GetInventory() {
         return inventoryList.ToArray();
+    }
+
+    public void SelectItem(int index) {
+        currItemIndex = index;
     }
 
     public void UseItem(int index) {

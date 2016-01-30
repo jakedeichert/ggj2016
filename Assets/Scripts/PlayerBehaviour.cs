@@ -40,6 +40,12 @@ public class PlayerBehaviour : MonoBehaviour {
             }
         }
 
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            SendMessage("BringUpItems", true);
+        } else {
+            SendMessage("BringUpItems", false);
+        }
+
         if (weapon != null) {
             if (Input.GetMouseButtonDown(0)) {
                 isChargingWeapon = true;
