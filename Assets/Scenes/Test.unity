@@ -908,7 +908,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Health: 9000'
+  m_Text: 'Health Text
+
+'
 --- !u!222 &1780223451
 CanvasRenderer:
   m_ObjectHideFlags: 0

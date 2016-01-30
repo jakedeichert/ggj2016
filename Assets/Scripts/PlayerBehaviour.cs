@@ -4,11 +4,12 @@ using System.Collections;
 [RequireComponent(typeof(HittableBehaviour))]
 public class PlayerBehaviour : MonoBehaviour {
     public float speed = 10;
-    public float friction = 0.1f;
+    public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
     private HittableBehaviour hittable;
     private InventoryBehaviour inventory;
+    private Rigidbody2D rigidbody2D;
     private Vector3 movement;
     private bool isChargingWeapon;
 
@@ -16,11 +17,7 @@ public class PlayerBehaviour : MonoBehaviour {
         movement = new Vector3(0,0,0);
         hittable = GetComponent<HittableBehaviour>();
         inventory = GetComponent<InventoryBehaviour>();
-        //TODO remove
-        Item potion;
-        potion.id = 0;
-        if (inventory != null) inventory.AddItem(potion);
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Player"), LayerMask.NameToLayer("Player"));
+        rigidbody2D = GetComponent<Rigidbody2D>();
 	}
 	
 	void Update () {
@@ -64,7 +61,9 @@ public class PlayerBehaviour : MonoBehaviour {
             weapon.transform.position = transform.position + (weaponForward * 4);
         }
 
-        transform.position += movement * Time.deltaTime;
+        rigidbody2D.AddForce(movement * Time.deltaTime);
+        Vector3 newPos = transform.position + movement * Time.deltaTime;
+        rigidbody2D.MovePosition(newPos);
         movement.x *= friction;
         movement.y *= friction;
 	}
