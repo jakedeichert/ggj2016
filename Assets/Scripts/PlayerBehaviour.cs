@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     public WeaponBehaviour weapon;
     private Vector3 movement;
+    private bool isChargingWeapon;
 
 	void Start () {
         movement = new Vector3(0,0,0);
@@ -28,9 +29,18 @@ public class PlayerBehaviour : MonoBehaviour {
             movement.y = -speed;
         }
 
-        if (Input.GetMouseButtonDown(0)) {
-            if (weapon != null) {
+        if (weapon != null) {
+            if (Input.GetMouseButtonDown(0)) {
+                isChargingWeapon = true;
+            }
+
+            if (Input.GetMouseButton(0) && isChargingWeapon) {
+                weapon.AddCharge(1.0f * Time.deltaTime);
+            }
+
+            if (Input.GetMouseButtonUp(0) && isChargingWeapon) {
                 weapon.UseWeapon();
+                isChargingWeapon = false;
             }
         }
 

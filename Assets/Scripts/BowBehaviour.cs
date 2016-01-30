@@ -10,6 +10,9 @@ public class BowBehaviour : WeaponBehaviour {
         player = transform.parent; //TODO figure out if weapon will know about player after all
         GameObject arrowClone = (GameObject)GameObject.Instantiate(arrow, transform.position, Quaternion.identity);
         arrowClone.transform.forward = (transform.position - player.position).normalized;
+        ArrowBehaviour arrowBehav = arrowClone.GetComponent<ArrowBehaviour>();
+        arrowBehav.speed = 20.0f * charge;
+        base.UseWeapon();
     }
 
     void Update() {
@@ -18,5 +21,13 @@ public class BowBehaviour : WeaponBehaviour {
         Quaternion newRotation = new Quaternion();
         newRotation.eulerAngles = new Vector3(0, 0, angle);
         transform.rotation = newRotation;
+    }
+
+    protected override void PlayChargedAnimation() {
+        Debug.Log("Will play bow's charged animation.");
+    }
+
+    protected override void StopChargedAnimation() {
+        Debug.Log("Will stop charged animation.");
     }
 }
