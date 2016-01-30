@@ -11,6 +11,7 @@ public class HittableBehaviour : MonoBehaviour {
             health = 0;
             SendMessage("OnDead");
         }
+        Debug.Log("Health: " + health);
     }
 
     public void Damage(int healthDelta) {

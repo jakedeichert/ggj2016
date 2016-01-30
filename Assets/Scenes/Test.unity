@@ -318,6 +318,8 @@ GameObject:
   - 61: {fileID: 1181905453}
   - 50: {fileID: 1181905452}
   - 114: {fileID: 1181905449}
+  - 114: {fileID: 1181905454}
+  - 114: {fileID: 1181905455}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -337,7 +339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57be24fde4dfd18448de4579f41ecf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
   speed: 10
   friction: 0.95
   weapon: {fileID: 307894566}
@@ -417,6 +418,29 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.56, y: 2.56}
+--- !u!114 &1181905454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1181905448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072c447f1c085034b819d2c6d78a46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+--- !u!114 &1181905455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1181905448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b0cf641acb4f924ebe65f4b57607996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1296258896
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,7 +600,7 @@ GameObject:
   - 61: {fileID: 1661219641}
   m_Layer: 8
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
