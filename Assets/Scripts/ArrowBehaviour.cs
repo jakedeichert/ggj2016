@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowBehaviour : MonoBehaviour {
     public float speed = 20.0f;
-    public float lifetime = 2.0f;
+    public float lifetime = 4.0f;
 
     private float timeElapsed;
 
@@ -24,6 +24,10 @@ public class ArrowBehaviour : MonoBehaviour {
         if (hittable != null) {
             hittable.Damage(10);
         }
+        Destroy(this.gameObject);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision) {
         Destroy(this.gameObject);
     }
 }
