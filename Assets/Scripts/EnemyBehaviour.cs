@@ -11,9 +11,14 @@ public class EnemyBehaviour : MonoBehaviour {
     float avoidanceRadius;
     float seekDistance;
     float mass;
+    const float ATTACK_DELAY = 1.1f;
+    float attackCountdown = 0;
+    HittableBehaviour hittable;
+    bool isAlive = true;   
 
 
-	void Start() {
+    void Start() {
+        hittable = gameObject.GetComponent<HittableBehaviour>();
         velocity = Vector2.zero;
         shouldSeek = true;
         avoidanceRadius = 3f;
@@ -23,9 +28,18 @@ public class EnemyBehaviour : MonoBehaviour {
 	}
 	
 	void Update () {
+        if (!isAlive) return;
         float distance = Vector3.Distance(playerTarget.transform.position, transform.position);
         if (distance < seekDistance && distance > 2) {
             seek(playerTarget.position);
+        } else if (distance <= 2) {
+            if (attackCountdown <= 0) {
+                playerTarget.GetComponent<HittableBehaviour>().Damage(10);
+                attackCountdown = ATTACK_DELAY;
+            } else {
+                attackCountdown -= Time.deltaTime;
+            }
+            velocity = Vector2.zero;
         } else {
             velocity = Vector2.zero;
         }
@@ -69,6 +83,12 @@ public class EnemyBehaviour : MonoBehaviour {
 
     Vector3 truncate(Vector3 v, float max) {
         return (v.magnitude > max) ? v.normalized * max : v;
+    }
+
+
+    void OnDead() {
+        isAlive = false;
+        transform.Rotate(0,0,90);
     }
 
 
