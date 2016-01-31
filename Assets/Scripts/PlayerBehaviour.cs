@@ -90,6 +90,7 @@ public class PlayerBehaviour : MonoBehaviour {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(10, 0, 0));
         if (weapon != null) {
             Vector3 weaponForward = (mousePos - transform.position).normalized;
+            weaponForward.z = 0;
             WeaponBehaviour weaponBehav = weapon.GetComponent<WeaponBehaviour>();
             if (weaponBehav != null) {
                 weaponBehav.Direction = weaponForward;
