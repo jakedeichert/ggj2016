@@ -44,12 +44,6 @@ public class PlayerBehaviour : MonoBehaviour {
             }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            uiController.BringUpItems(true);
-        } else if (Input.GetKeyUp(KeyCode.LeftShift)) {
-            uiController.BringUpItems(false);
-        }
-
         if (weapon != null) {
             if (Input.GetMouseButtonDown(0)) {
                 isChargingWeapon = true;

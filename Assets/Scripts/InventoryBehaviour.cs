@@ -11,6 +11,8 @@ public class InventoryBehaviour : MonoBehaviour {
     private List<InventoryEntry> inventoryList;
     private int currItemIndex;
 
+    public ItemDispatcher itemDispatcher;
+
     public int CurrItemIndex {
         get {
             return currItemIndex;
@@ -57,8 +59,8 @@ public class InventoryBehaviour : MonoBehaviour {
         if (index < 0 || index >= inventoryList.Count) return;
         InventoryEntry useEntry = inventoryList[index];
         int useID = useEntry.item.id;
-        if (useID == 0 && useEntry.quantity > 0) {
-            SendMessage("AddHealth", 10);
+        if (useEntry.quantity > 0) {
+            itemDispatcher.CallItemAction(useID, transform);
             useEntry.quantity--;
             if (useEntry.quantity <= 0) {
                 RemoveItem(index);

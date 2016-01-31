@@ -38,10 +38,13 @@ public class ItemListUIBehaviour : MonoBehaviour {
                 itemBox.transform.SetParent(transform);
                 Debug.Log("Item box width: " + itemBox.GetComponent<Image>().sprite.rect.width);
                 itemBox.transform.position = new Vector3(32 + (itemBox.GetComponent<Image>().sprite.rect.width * i), 32, 0);
+                Debug.Log(i + " position: " + itemBox.transform.position);
                 itemBoxList.Add(itemBox.GetComponent<Image>());
                 itemImageList.Add(itemImage.GetComponent<Image>());
             }
         }
+        Debug.Log("This callled.");
+        Debug.Log("Image Box List length: " + itemBoxList.Count);
         //Grab all infos
         for (int i = 0; i < inventoryArr.Length; i++) {
             itemImageList[i].sprite = itemDatabase.FindItemSprite(inventoryArr[i].item.id);
@@ -49,6 +52,10 @@ public class ItemListUIBehaviour : MonoBehaviour {
     }
 
     void Update() {
+
+    }
+
+    void OnInventoryUpdate(int thing) {
 
     }
 }

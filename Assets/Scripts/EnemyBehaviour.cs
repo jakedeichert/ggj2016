@@ -12,6 +12,7 @@ public class EnemyBehaviour : MonoBehaviour {
     float seekDistance;
     float mass;
 
+    public HittableBehaviour hittable;
 
 	void Start() {
         velocity = Vector2.zero;
@@ -74,5 +75,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void move() {
         transform.position += (Vector3)velocity * Time.deltaTime;
+    }
+
+    void OnDead() {
+        Destroy(this.gameObject);
     }
 }
