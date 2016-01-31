@@ -15,6 +15,7 @@ public class EnemyBehaviour : MonoBehaviour {
     float attackCountdown = 0;
     HittableBehaviour hittable;
     bool isAlive = true;
+    Animator anim;
 
     void Start() {
         hittable = GetComponent<HittableBehaviour>();
@@ -24,6 +25,7 @@ public class EnemyBehaviour : MonoBehaviour {
         maxVelocity = 5.0f;
         seekDistance = 15.0f;
         mass = 20.0f;
+        anim = GetComponent<Animator>();
 	}
 	
 	void Update () {
@@ -31,6 +33,7 @@ public class EnemyBehaviour : MonoBehaviour {
         float distance = Vector3.Distance(playerTarget.transform.position, transform.position);
         if (distance < seekDistance && distance > 2) {
             seek(playerTarget.position);
+            anim.Play("no_animation");
         } else if (distance <= 2) {
             if (attackCountdown <= 0) {
                 playerTarget.GetComponent<HittableBehaviour>().Damage(10);
@@ -39,8 +42,10 @@ public class EnemyBehaviour : MonoBehaviour {
                 attackCountdown -= Time.deltaTime;
             }
             velocity = Vector2.zero;
+            anim.Play("no_animation");
         } else {
             velocity = Vector2.zero;
+            anim.Play("skeleton_idle");
         }
     }
 
