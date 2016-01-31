@@ -127,6 +127,9 @@ public class PlayerBehaviour : MonoBehaviour {
             case "Speed":
                 speed += buffInfo.buffAmount;
                 break;
+            case "Health":
+                hittable.maxHealth += buffInfo.buffAmount;
+                break;
             default:
                 break;
         }
