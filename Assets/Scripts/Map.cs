@@ -239,6 +239,8 @@ public class Map : MonoBehaviour{
 
         tiles[x, y].GetComponent<Tile>().SetGridPos(x, y);
 
+        tiles[x, y].GetComponent<SpriteRenderer>().sortingLayerName = "Wall";
+
         if (wallT == 3 || wallT == 6 || wallT == 7 || wallT == 8 || wallT == 10 || wallT == 11 || wallT == 13 || wallT == 15) {
             //spawn flat wall
             GameObject flatWall = GameObject.Instantiate(basic_tile, Vector2.zero, Quaternion.identity) as GameObject;
@@ -249,9 +251,15 @@ public class Map : MonoBehaviour{
             flatWall.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("flat_wall2");
 
             flatWall.transform.Translate(0.0f, -1.12f * SCALE_Y, 0.0f);
+
+            flatWall.GetComponent<SpriteRenderer>().sortingLayerName = "Wall Front";
         }
 
+        //shift walls for 3D effect
         tiles[x, y].transform.Translate(0.0f, 1.28f * 1.2f, 0.0f);
+
+        tiles[x, y].AddComponent<BoxCollider2D>();
+        tiles[x, y].GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, -0.78f); //hard coded offset
     }
     public void SpawnEmptyWall(int x, int y, int offX, int offY) {
         tiles[x, y] = GameObject.Instantiate(basic_tile, new Vector2(x - offX, y - offY), Quaternion.identity) as GameObject;
@@ -272,5 +280,7 @@ public class Map : MonoBehaviour{
         tiles[x, y].GetComponent<Tile>().SetGridPos(x, y);
 
         tiles[x, y].GetComponent<Tile>().empty = true;
+
+        tiles[x, y].transform.Translate(0.0f, 1.28f * 1.2f, 0.0f);
     }
 }
