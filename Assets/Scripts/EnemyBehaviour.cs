@@ -35,7 +35,7 @@ public class EnemyBehaviour : MonoBehaviour {
         float distance = Vector3.Distance(playerTarget.transform.position, transform.position);
         if (distance < seekDistance && distance > 2) {
             seek(playerTarget.position);
-            anim.Play("no_animation");
+            anim.Play("skeleton_walk");
         } else if (distance <= 2) {
             if (attackCountdown <= 0) {
                 playerTarget.GetComponent<HittableBehaviour>().Damage(10);
