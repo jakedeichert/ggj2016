@@ -92,9 +92,9 @@ public class InventoryBehaviour : MonoBehaviour {
         //Get ID, check quantity and pass to dispatcher
         int useID = useEntry.item.id;
         if (useEntry.quantity > 0) {
-            itemDispatcher.CallItemAction(useID, transform);
+            int itemSuccess = itemDispatcher.CallItemAction(useID, transform);
             //If non-permanent, remove a quantity from item
-            if (!useEntry.item.isPermanent) {
+            if (!useEntry.item.isPermanent && itemSuccess == 1) {
                 useEntry.quantity--;
                 if (useEntry.quantity <= 0) {
                     RemoveItem(index);

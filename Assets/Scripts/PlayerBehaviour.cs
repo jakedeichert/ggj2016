@@ -7,6 +7,7 @@ using System.Collections;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerBehaviour : MonoBehaviour {
     public int speed = 10;
+    public int attackBoost = 10;
     public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
