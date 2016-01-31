@@ -11,6 +11,8 @@ public class EnemyBehaviour : MonoBehaviour {
     float avoidanceRadius;
     float seekDistance;
     float mass;
+    const float ATTACK_DELAY = 1.1f;
+    float attackCountdown = 0;
 
 
 	void Start() {
@@ -26,6 +28,14 @@ public class EnemyBehaviour : MonoBehaviour {
         float distance = Vector3.Distance(playerTarget.transform.position, transform.position);
         if (distance < seekDistance && distance > 2) {
             seek(playerTarget.position);
+        } else if (distance <= 2) {
+            if (attackCountdown <= 0) {
+                playerTarget.GetComponent<HittableBehaviour>().Damage(10);
+                attackCountdown = ATTACK_DELAY;
+            } else {
+                attackCountdown -= Time.deltaTime;
+            }
+            velocity = Vector2.zero;
         } else {
             velocity = Vector2.zero;
         }
