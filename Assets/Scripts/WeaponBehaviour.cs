@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WeaponBehaviour : MonoBehaviour {
-    protected float charge;
+    protected float charge = 0.6f;
     private const float MAX_CHARGE = 5.0f;
     protected Vector3 direction;
 
@@ -28,7 +28,7 @@ public class WeaponBehaviour : MonoBehaviour {
         UnchargeWeapon();
     }
     public void UnchargeWeapon() {
-        charge = 0.0f;
+        charge = 0.6f;
         StopChargedAnimation();
     }
     protected virtual void PlayChargedAnimation() { }

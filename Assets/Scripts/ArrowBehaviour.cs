@@ -9,25 +9,24 @@ public class ArrowBehaviour : MonoBehaviour {
     private float timeElapsed;
 
     void Update() {
-        transform.position += transform.forward * speed * Time.deltaTime;
+        transform.position += transform.right * speed * Time.deltaTime;
 
         timeElapsed += Time.deltaTime;
 
         if (timeElapsed >= lifetime) {
-            GameObject.Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        Debug.Log("Hit something!");
         HittableBehaviour hittable = collider.transform.GetComponent<HittableBehaviour>();
         if (hittable != null) {
             hittable.Damage(10);
         }
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
