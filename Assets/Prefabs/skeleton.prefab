@@ -12,6 +12,7 @@ GameObject:
   - 114: {fileID: 11446368}
   - 61: {fileID: 6149340}
   - 114: {fileID: 11445920}
+  - 95: {fileID: 9555348}
   m_Layer: 0
   m_Name: skeleton
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.14763, y: 0.42039105, z: 0}
+  m_LocalPosition: {x: -12.6, y: -0.47, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,7 +45,24 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.17, y: 0.21}
+  m_Size: {x: 0.17, y: 0.22}
+--- !u!95 &9555348
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 137586}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8183288900bf0264d84b39768021a370, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11445920
 MonoBehaviour:
   m_ObjectHideFlags: 1
