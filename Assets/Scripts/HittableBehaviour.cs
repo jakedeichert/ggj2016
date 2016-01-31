@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class HittableBehaviour : MonoBehaviour {
     public int health;
+    bool isDead;
 
     public void AddHealth(int healthDelta) {
+        if (isDead) return;
         health += healthDelta;
         if (health <= 0) {
             health = 0;

@@ -132,6 +132,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     void OnDead() {
         Debug.Log("Player is dead!");
+        uiController.SendMessage("ResetLevel");
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
