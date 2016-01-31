@@ -65,9 +65,12 @@ public class PlayerBehaviour : MonoBehaviour {
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition + new Vector3(10, 0, 0));
         if (weapon != null) {
             Vector3 weaponForward = (mousePos - transform.position).normalized;
-            weapon.transform.position = transform.position + (weaponForward * 4);
-            Vector3 norTar = (weapon.transform.localPosition).normalized;
-            float angle = Mathf.Atan2(norTar.y, norTar.x) * Mathf.Rad2Deg;
+            WeaponBehaviour weaponBehav = weapon.GetComponent<WeaponBehaviour>();
+            if (weaponBehav != null) {
+                weaponBehav.Direction = weaponForward;
+            }
+            Vector3 weaponForwardNor = (weaponForward).normalized;
+            float angle = Mathf.Atan2(weaponForwardNor.y, weaponForwardNor.x) * Mathf.Rad2Deg;
             Quaternion newRotation = new Quaternion();
             newRotation.eulerAngles = new Vector3(0, 0, angle);
             weapon.transform.rotation = newRotation;
