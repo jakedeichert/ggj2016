@@ -91,6 +91,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void OnDead() {
         if (!isAlive) return;
+        anim.Play("no_animation");
         isAlive = false;
         transform.Rotate(0,0,90);
     }
