@@ -36,7 +36,6 @@ public class EnemyBehaviour : MonoBehaviour {
             if (attackCountdown <= 0) {
                 playerTarget.GetComponent<HittableBehaviour>().Damage(10);
                 attackCountdown = ATTACK_DELAY;
-                OnDead();
             } else {
                 attackCountdown -= Time.deltaTime;
             }
