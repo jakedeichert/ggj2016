@@ -48,7 +48,6 @@ public class ItemListUIBehaviour : MonoBehaviour {
                 itemImageList.Add(itemImage.GetComponent<Image>());
             }
         }
-        Debug.Log("This callled.");
         Debug.Log("Image Box List length: " + itemBoxList.Count);
         //Grab all infos
         for (int i = 0; i < inventoryArr.Length; i++) {
