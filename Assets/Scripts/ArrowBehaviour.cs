@@ -20,6 +20,10 @@ public class ArrowBehaviour : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D collision) {
         Debug.Log("Hit something!");
+        HittableBehaviour hittable = collision.transform.GetComponent<HittableBehaviour>();
+        if (hittable != null) {
+            hittable.Damage(10);
+        }
         Destroy(this.gameObject);
     }
 }

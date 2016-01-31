@@ -14,11 +14,10 @@ public class EnemyBehaviour : MonoBehaviour {
     const float ATTACK_DELAY = 1.1f;
     float attackCountdown = 0;
     HittableBehaviour hittable;
-    bool isAlive = true;   
-
+    bool isAlive = true;
 
     void Start() {
-        hittable = gameObject.GetComponent<HittableBehaviour>();
+        hittable = GetComponent<HittableBehaviour>();
         velocity = Vector2.zero;
         shouldSeek = true;
         avoidanceRadius = 3f;
@@ -85,12 +84,10 @@ public class EnemyBehaviour : MonoBehaviour {
         return (v.magnitude > max) ? v.normalized * max : v;
     }
 
-
     void OnDead() {
         isAlive = false;
         transform.Rotate(0,0,90);
     }
-
 
     void move() {
         transform.position += (Vector3)velocity * Time.deltaTime;
