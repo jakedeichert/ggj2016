@@ -16,6 +16,7 @@ public class EnemyBehaviour : MonoBehaviour {
     HittableBehaviour hittable;
     bool isAlive = true;
     Animator anim;
+    SpriteRenderer spriteRenderer;
 
     void Start() {
         hittable = GetComponent<HittableBehaviour>();
@@ -26,6 +27,7 @@ public class EnemyBehaviour : MonoBehaviour {
         seekDistance = 15.0f;
         mass = 20.0f;
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 	
 	void Update () {
@@ -46,6 +48,12 @@ public class EnemyBehaviour : MonoBehaviour {
         } else {
             velocity = Vector2.zero;
             anim.Play("skeleton_idle");
+        }
+
+        if (velocity.x < 0) {
+            spriteRenderer.flipX = true;
+        } else {
+            spriteRenderer.flipX = false;
         }
     }
 
