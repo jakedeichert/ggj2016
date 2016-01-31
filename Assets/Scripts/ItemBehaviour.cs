@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public struct Item {
-    public int id;
-}
-
 public class ItemBehaviour : MonoBehaviour {
     public Item item;
 

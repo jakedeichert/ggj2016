@@ -3,12 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InventoryEntry {
-    public Item item;
-    public int invenID;
-    public int quantity;
-}
-
 public class InventoryBehaviour : MonoBehaviour {
     private List<InventoryEntry> inventoryList;
     private int currItemIndex;
@@ -64,6 +58,11 @@ public class InventoryBehaviour : MonoBehaviour {
         if (inventoryList.Count == 1) {
             SelectItem(0);
         }
+        //If it's a permanent, use it immediately
+        if (item.isPermanent) {
+            UseItem(inEntry.invenID);
+        }
+        //Notify listeners
         inventoryChangeEvent.Invoke();
     }
 
@@ -94,17 +93,20 @@ public class InventoryBehaviour : MonoBehaviour {
         int useID = useEntry.item.id;
         if (useEntry.quantity > 0) {
             itemDispatcher.CallItemAction(useID, transform);
-            useEntry.quantity--;
-            if (useEntry.quantity <= 0) {
-                RemoveItem(index);
-            } else {
-                inventoryChangeEvent.Invoke();
+            //If non-permanent, remove a quantity from item
+            if (!useEntry.item.isPermanent) {
+                useEntry.quantity--;
+                if (useEntry.quantity <= 0) {
+                    RemoveItem(index);
+                } else {
+                    inventoryChangeEvent.Invoke();
+                }
             }
         }
     }
 
     public void UseItemByIndex(int index) {
-        if (index < 0 || index >= inventoryList.Count) return;
+        if (index < 0 || index >= inventoryList.Count || inventoryList[index].item.isPermanent) return;
         UseItem(inventoryList[index].invenID);
     }
 
