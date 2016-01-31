@@ -18,9 +18,9 @@ public class ArrowBehaviour : MonoBehaviour {
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
+    void OnTriggerEnter2D(Collider2D collider) {
         Debug.Log("Hit something!");
-        HittableBehaviour hittable = collision.transform.GetComponent<HittableBehaviour>();
+        HittableBehaviour hittable = collider.transform.GetComponent<HittableBehaviour>();
         if (hittable != null) {
             hittable.Damage(10);
         }
