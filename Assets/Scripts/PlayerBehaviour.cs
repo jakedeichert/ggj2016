@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E)) {
             if (inventory != null) {
-                inventory.UseItem(0);
+                inventory.UseItemByIndex(0);
             }
         }
 

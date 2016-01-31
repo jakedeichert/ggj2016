@@ -34,9 +34,9 @@ public class ItemListUIBehaviour : MonoBehaviour {
             for (int i = inventoryArr.Length; i < itemBoxList.Count; i++) {
                 GameObject.Destroy(itemBoxList[i].gameObject);
                 GameObject.Destroy(itemImageList[i].gameObject);
+                itemBoxList.Remove(itemBoxList[i]);
+                itemImageList.Remove(itemImageList[i]);
             }
-            itemBoxList.RemoveRange(inventoryArr.Length, itemBoxList.Count - inventoryArr.Length);
-            itemImageList.RemoveRange(inventoryArr.Length, itemBoxList.Count - inventoryArr.Length);
         } else if (itemBoxList.Count < inventoryArr.Length) {
             //Add more boxes to accomodate more inventory items than before
             for (int i = 0; i < inventoryArr.Length - itemBoxList.Count; i++) {
@@ -48,12 +48,10 @@ public class ItemListUIBehaviour : MonoBehaviour {
                 itemImageList.Add(itemImage.GetComponent<Image>());
             }
         }
-        Debug.Log("Image Box List length: " + itemBoxList.Count);
         //Grab all infos
         for (int i = 0; i < inventoryArr.Length; i++) {
             itemImageList[i].sprite = itemDatabase.FindItemSprite(inventoryArr[i].item.id);
             itemBoxList[i].transform.position = new Vector3(32 + (itemBoxList[i].GetComponent<Image>().sprite.rect.width * i), itemBoxList[i].GetComponent<Image>().sprite.rect.height, 0);
-            Debug.Log(i + " position: " + itemBoxList[i].transform.position);
         }
     }
 

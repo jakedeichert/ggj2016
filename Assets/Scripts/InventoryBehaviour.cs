@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class InventoryEntry {
     public Item item;
+    public int invenID;
     public int quantity;
 }
 
@@ -12,19 +13,24 @@ public class InventoryBehaviour : MonoBehaviour {
     private List<InventoryEntry> inventoryList;
     private int currItemIndex;
 
+    private int lastInvenIDAssigned;
+
     public ItemDispatcher itemDispatcher;
 
     private UnityEvent inventoryChangeEvent;
 
-    public UnityEvent InventoryChangeEvent {
+    public int CurrItemID {
         get {
-            return inventoryChangeEvent;
+            if (inventoryList != null && currItemIndex >= 0 && currItemIndex < inventoryList.Count) {
+                return inventoryList[currItemIndex].item.id;
+            }
+            return -1;
         }
     }
 
-    public int CurrItemIndex {
+    public UnityEvent InventoryChangeEvent {
         get {
-            return currItemIndex;
+            return inventoryChangeEvent;
         }
     }
 
@@ -34,6 +40,7 @@ public class InventoryBehaviour : MonoBehaviour {
     }
 
     void Start() {
+        lastInvenIDAssigned = 0;
         currItemIndex = -1;
     }
 
@@ -50,6 +57,8 @@ public class InventoryBehaviour : MonoBehaviour {
         InventoryEntry inEntry = new InventoryEntry();
         inEntry.item = item;
         inEntry.quantity = 1;
+        inEntry.invenID = lastInvenIDAssigned;
+        lastInvenIDAssigned++;
         inventoryList.Add(inEntry);
         //If this is the first item player gets, select it automatically
         if (inventoryList.Count == 1) {
@@ -66,9 +75,22 @@ public class InventoryBehaviour : MonoBehaviour {
         currItemIndex = index;
     }
 
-    public void UseItem(int index) {
-        if (index < 0 || index >= inventoryList.Count) return;
-        InventoryEntry useEntry = inventoryList[index];
+    public void BindItem(int invenID, KeyCode keyCode) {
+
+    }
+
+    void UseItem(int invenID) {
+        InventoryEntry useEntry = null;
+        int index = -1;
+        //Look for the index of the inventory entry
+        for (int i = 0; i < inventoryList.Count; i++) {
+            if (inventoryList[i].invenID == invenID) {
+                useEntry = inventoryList[i];
+                index = i;
+            }
+        }
+        if (useEntry == null) return;
+        //Get ID, check quantity and pass to dispatcher
         int useID = useEntry.item.id;
         if (useEntry.quantity > 0) {
             itemDispatcher.CallItemAction(useID, transform);
@@ -79,6 +101,11 @@ public class InventoryBehaviour : MonoBehaviour {
                 inventoryChangeEvent.Invoke();
             }
         }
+    }
+
+    public void UseItemByIndex(int index) {
+        if (index < 0 || index >= inventoryList.Count) return;
+        UseItem(inventoryList[index].invenID);
     }
 
     public void RemoveItem(int index) {

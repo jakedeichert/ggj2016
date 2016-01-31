@@ -10,12 +10,14 @@ public class CurrentItemUIBehaviour : MonoBehaviour {
     public ItemDatabase itemDatabase;
 
     void Start() {
-        
+        if (inventoryBehav != null) {
+            inventoryBehav.InventoryChangeEvent.AddListener(Refresh);
+        }
     }
 
-    void Update() {
+    void Refresh() {
         if (inventoryBehav != null && backImage != null && frontImage != null && itemDatabase != null) {
-            frontImage.sprite = itemDatabase.FindItemSprite(inventoryBehav.CurrItemIndex);
+            frontImage.sprite = itemDatabase.FindItemSprite(inventoryBehav.CurrItemID);
         }
     }
 }
