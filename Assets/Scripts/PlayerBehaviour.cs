@@ -6,7 +6,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerBehaviour : MonoBehaviour {
-    public float speed = 10;
+    public int speed = 10;
     public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
@@ -89,6 +89,16 @@ public class PlayerBehaviour : MonoBehaviour {
             spriteRenderer.flipX = false;
         } else {
             spriteRenderer.flipX = true;
+        }
+    }
+
+    void ApplyBuff(BuffInfo buffInfo) {
+        switch (buffInfo.buffType) {
+            case "Speed":
+                speed += buffInfo.buffAmount;
+                break;
+            default:
+                break;
         }
     }
 
