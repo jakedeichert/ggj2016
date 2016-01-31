@@ -71,6 +71,10 @@ public class PlayerBehaviour : MonoBehaviour {
         movement.y *= friction;
 	}
 
+    void OnDead() {
+        Debug.Log("Player is dead!");
+    }
+
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.tag == "Item") {
             collider.SendMessage("PickupItem", this);
