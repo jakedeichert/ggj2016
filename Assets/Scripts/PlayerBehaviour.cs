@@ -41,9 +41,34 @@ public class PlayerBehaviour : MonoBehaviour {
             movement.y = -speed;
         }
 
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
             if (inventory != null) {
                 inventory.UseItemByIndex(0);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            if (inventory != null) {
+                inventory.UseItemByIndex(1);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            if (inventory != null) {
+                inventory.UseItemByIndex(2);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha4)) {
+            if (inventory != null) {
+                inventory.UseItemByIndex(3);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5)) {
+            if (inventory != null) {
+                inventory.UseItemByIndex(4);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6)) {
+            if (inventory != null) {
+                inventory.UseItemByIndex(5);
             }
         }
 
