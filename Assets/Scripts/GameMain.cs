@@ -6,7 +6,7 @@ public class GameMain : MonoBehaviour {
     public EnemyBehaviour enemyPrefab;
     public GameObject player;
     List<EnemyBehaviour> allEnemies = new List<EnemyBehaviour>();
-    int numEnemies = 3;
+    public int numEnemies = 3;
 
 
     void Start() {

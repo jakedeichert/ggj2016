@@ -40,7 +40,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.E)) {
             if (inventory != null) {
-                inventory.UseItem(0);
+                inventory.UseItemByIndex(0);
             }
         }
 
@@ -70,6 +70,10 @@ public class PlayerBehaviour : MonoBehaviour {
         movement.x *= friction;
         movement.y *= friction;
 	}
+
+    void OnDead() {
+        Debug.Log("Player is dead!");
+    }
 
     void OnTriggerEnter2D(Collider2D collider) {
         if (collider.tag == "Item") {
