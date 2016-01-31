@@ -5,6 +5,7 @@ using UnityEngine;
 public class BowBehaviour : WeaponBehaviour {
     public GameObject arrow;
     public Transform player;
+    float angle;
 
     public override void UseWeapon() {
         player = transform.parent; //TODO figure out if weapon will know about player after all
@@ -16,11 +17,7 @@ public class BowBehaviour : WeaponBehaviour {
     }
 
     void Update() {
-        Vector3 norTar = (transform.localPosition).normalized;
-        float angle = Mathf.Atan2(norTar.y, norTar.x) * Mathf.Rad2Deg;
-        Quaternion newRotation = new Quaternion();
-        newRotation.eulerAngles = new Vector3(0, 0, angle);
-        transform.rotation = newRotation;
+        
     }
 
     protected override void PlayChargedAnimation() {

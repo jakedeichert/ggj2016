@@ -4,8 +4,9 @@ using System.Collections;
 [RequireComponent(typeof(HittableBehaviour))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerBehaviour : MonoBehaviour {
-    public float speed = 10;
+    public int speed = 10;
     public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
@@ -13,7 +14,8 @@ public class PlayerBehaviour : MonoBehaviour {
 
     private HittableBehaviour hittable;
     private InventoryBehaviour inventory;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rBody;
+    private SpriteRenderer spriteRenderer;
     private Vector3 movement;
     private bool isChargingWeapon;
 
@@ -21,7 +23,8 @@ public class PlayerBehaviour : MonoBehaviour {
         movement = new Vector3(0,0,0);
         hittable = GetComponent<HittableBehaviour>();
         inventory = GetComponent<InventoryBehaviour>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 	}
 	
 	void Update () {
@@ -63,13 +66,41 @@ public class PlayerBehaviour : MonoBehaviour {
         if (weapon != null) {
             Vector3 weaponForward = (mousePos - transform.position).normalized;
             weapon.transform.position = transform.position + (weaponForward * 4);
+            Vector3 norTar = (weapon.transform.localPosition).normalized;
+            float angle = Mathf.Atan2(norTar.y, norTar.x) * Mathf.Rad2Deg;
+            Quaternion newRotation = new Quaternion();
+            newRotation.eulerAngles = new Vector3(0, 0, angle);
+            weapon.transform.rotation = newRotation;
+            if (newRotation.eulerAngles.z > 90 && newRotation.eulerAngles.z < 270) {
+                FlipDirection(-1);
+            } else {
+                FlipDirection(1);
+            }
         }
 
         Vector3 newPos = transform.position + movement * Time.deltaTime;
-        rigidbody2D.MovePosition(newPos);
+        rBody.MovePosition(newPos);
         movement.x *= friction;
         movement.y *= friction;
 	}
+
+    void FlipDirection(int direction) {
+        if (direction >= 0) {
+            spriteRenderer.flipX = false;
+        } else {
+            spriteRenderer.flipX = true;
+        }
+    }
+
+    void ApplyBuff(BuffInfo buffInfo) {
+        switch (buffInfo.buffType) {
+            case "Speed":
+                speed += buffInfo.buffAmount;
+                break;
+            default:
+                break;
+        }
+    }
 
     void OnDead() {
         Debug.Log("Player is dead!");

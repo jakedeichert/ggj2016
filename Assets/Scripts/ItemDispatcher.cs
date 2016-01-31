@@ -11,6 +11,12 @@ public class ItemDispatcher : MonoBehaviour {
             case 1:
                 callee.SendMessage("AddHealth", 50);
                 break;
+            case 2:
+                BuffInfo speedBuff;
+                speedBuff.buffType = "Speed";
+                speedBuff.buffAmount = 5;
+                callee.SendMessage("ApplyBuff", speedBuff);
+                break;
             default:
                 break;
         }
