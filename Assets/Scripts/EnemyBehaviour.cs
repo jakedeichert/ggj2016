@@ -36,24 +36,36 @@ public class EnemyBehaviour : MonoBehaviour {
         if (distance < seekDistance && distance > 2) {
             seek(playerTarget.position);
             anim.Play("skeleton_walk");
-        } else if (distance <= 2) {
-            if (attackCountdown <= 0) {
-                playerTarget.GetComponent<HittableBehaviour>().Damage(10);
-                attackCountdown = ATTACK_DELAY;
+            attackCountdown = 0;
+            if (velocity.x < 0) {
+                spriteRenderer.flipX = true;
             } else {
-                attackCountdown -= Time.deltaTime;
+                spriteRenderer.flipX = false;
             }
+        } else if (distance <= 2) {
+            updateAttack();
             velocity = Vector2.zero;
             anim.Play("skeleton_attack");
+            if (playerTarget.transform.position.x < transform.position.x) {
+                spriteRenderer.flipX = true;
+            } else {
+                spriteRenderer.flipX = false;
+            }
         } else {
             velocity = Vector2.zero;
+            attackCountdown = 0;
             anim.Play("skeleton_idle");
         }
 
-        if (velocity.x < 0) {
-            spriteRenderer.flipX = true;
+    }
+
+
+    void updateAttack() {
+        if (attackCountdown <= 0) {
+            playerTarget.GetComponent<HittableBehaviour>().Damage(10);
+            attackCountdown = ATTACK_DELAY;
         } else {
-            spriteRenderer.flipX = false;
+            attackCountdown -= Time.deltaTime;
         }
     }
 
