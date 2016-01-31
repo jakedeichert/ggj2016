@@ -42,7 +42,7 @@ public class EnemyBehaviour : MonoBehaviour {
                 attackCountdown -= Time.deltaTime;
             }
             velocity = Vector2.zero;
-            anim.Play("no_animation");
+            anim.Play("skeleton_attack");
         } else {
             velocity = Vector2.zero;
             anim.Play("skeleton_idle");
