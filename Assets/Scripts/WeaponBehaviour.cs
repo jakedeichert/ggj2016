@@ -24,7 +24,7 @@ public class WeaponBehaviour : MonoBehaviour {
             }
         }
     }
-    public virtual void UseWeapon() {
+    public virtual void UseWeapon(int attackBoost = 1) {
         UnchargeWeapon();
     }
     public void UnchargeWeapon() {

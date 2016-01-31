@@ -43,6 +43,13 @@ public class ItemDispatcher : MonoBehaviour {
                 callee.SendMessage("ApplyBuff", healthBuff);
                 itemSuccess = 1;
                 break;
+            case 4:
+                BuffInfo attackBuff;
+                attackBuff.buffType = "Attack";
+                attackBuff.buffAmount = 1;
+                callee.SendMessage("ApplyBuff", attackBuff);
+                itemSuccess = 1;
+                break;
             default:
                 break;
         }

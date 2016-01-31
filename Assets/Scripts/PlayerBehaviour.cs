@@ -7,7 +7,7 @@ using System.Collections;
 [RequireComponent(typeof(SpriteRenderer))]
 public class PlayerBehaviour : MonoBehaviour {
     public int speed = 10;
-    public int attackBoost = 10;
+    public int attackBoost = 1;
     public float friction = 0.95f;
 
     public WeaponBehaviour weapon;
@@ -83,7 +83,7 @@ public class PlayerBehaviour : MonoBehaviour {
             }
 
             if (Input.GetMouseButtonUp(0) && isChargingWeapon) {
-                weapon.UseWeapon();
+                weapon.UseWeapon(attackBoost);
                 isChargingWeapon = false;
             }
         }
@@ -129,6 +129,9 @@ public class PlayerBehaviour : MonoBehaviour {
                 break;
             case "Health":
                 hittable.maxHealth += buffInfo.buffAmount;
+                break;
+            case "Attack":
+                attackBoost += buffInfo.buffAmount;
                 break;
             default:
                 break;

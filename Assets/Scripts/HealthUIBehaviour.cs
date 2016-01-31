@@ -13,6 +13,6 @@ public class HealthUIBehaviour : MonoBehaviour {
     }
 
     void Update() {
-        uiText.text = "Health: " + playerHittable.health;
+        uiText.text = "Health: " + playerHittable.health + "/" + playerHittable.maxHealth;
     }
 }

@@ -144,6 +144,65 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &353662422
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 404028, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 108356, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_Name
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 21204692, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: cd0b39128c963104785425e568ccb12e,
+        type: 3}
+    - target: {fileID: 11494000, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: item.isPermanent
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11494000, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+      propertyPath: item.id
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: be266cd3e7b79124a9cfafb98b7a2272, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &380634252
 Prefab:
   m_ObjectHideFlags: 0
@@ -327,7 +386,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 487446, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11416554, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
       propertyPath: uiController
@@ -337,22 +396,6 @@ Prefab:
       propertyPath: itemDispatcher
       value: 
       objectReference: {fileID: 1281083817}
-    - target: {fileID: 21286464, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024908, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
-      propertyPath: m_BackGroundColor.r
-      value: 0.23529412
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024908, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
-      propertyPath: m_BackGroundColor.g
-      value: 0.22352941
-      objectReference: {fileID: 0}
-    - target: {fileID: 2024908, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
-      propertyPath: m_BackGroundColor.b
-      value: 0.33333334
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
   m_IsPrefabParent: 0
@@ -609,6 +652,9 @@ MonoBehaviour:
   - sprite: {fileID: 21300000, guid: be7628859a34d5e4cae458d5eecee4b7, type: 3}
     name: Heart Container
     id: 3
+  - sprite: {fileID: 21300000, guid: cd0b39128c963104785425e568ccb12e, type: 3}
+    name: Attack Boost
+    id: 4
   invalidItemSprite: {fileID: 21300000, guid: 09964e31cde6fb44b8f52aa175145855, type: 3}
   invalidItemName: None
 --- !u!114 &1281083816
