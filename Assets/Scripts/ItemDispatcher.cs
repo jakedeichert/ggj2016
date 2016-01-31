@@ -36,6 +36,13 @@ public class ItemDispatcher : MonoBehaviour {
                 callee.SendMessage("ApplyBuff", speedBuff);
                 itemSuccess = 1;
                 break;
+            case 3:
+                BuffInfo healthBuff;
+                healthBuff.buffType = "Health";
+                healthBuff.buffAmount = 10;
+                callee.SendMessage("ApplyBuff", healthBuff);
+                itemSuccess = 1;
+                break;
             default:
                 break;
         }
