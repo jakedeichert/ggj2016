@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryEntry {
     public Item item;
@@ -13,6 +14,14 @@ public class InventoryBehaviour : MonoBehaviour {
 
     public ItemDispatcher itemDispatcher;
 
+    private UnityEvent inventoryChangeEvent;
+
+    public UnityEvent InventoryChangeEvent {
+        get {
+            return inventoryChangeEvent;
+        }
+    }
+
     public int CurrItemIndex {
         get {
             return currItemIndex;
@@ -21,6 +30,7 @@ public class InventoryBehaviour : MonoBehaviour {
 
     void Awake() {
         inventoryList = new List<InventoryEntry>();
+        inventoryChangeEvent = new UnityEvent();
     }
 
     void Start() {
@@ -45,6 +55,7 @@ public class InventoryBehaviour : MonoBehaviour {
         if (inventoryList.Count == 1) {
             SelectItem(0);
         }
+        inventoryChangeEvent.Invoke();
     }
 
     public InventoryEntry[] GetInventory() {
@@ -64,6 +75,8 @@ public class InventoryBehaviour : MonoBehaviour {
             useEntry.quantity--;
             if (useEntry.quantity <= 0) {
                 RemoveItem(index);
+            } else {
+                inventoryChangeEvent.Invoke();
             }
         }
     }
@@ -73,5 +86,6 @@ public class InventoryBehaviour : MonoBehaviour {
         if (inventoryList.Count <= 0) {
             currItemIndex = -1;
         }
+        inventoryChangeEvent.Invoke();
     }
 }
