@@ -396,6 +396,14 @@ Prefab:
       propertyPath: itemDispatcher
       value: 
       objectReference: {fileID: 1281083817}
+    - target: {fileID: 6104112, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
+      propertyPath: m_Size.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6104112, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
+      propertyPath: m_Offset.y
+      value: -0.09
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ec42652edc66504488bd36fa84ab0b7, type: 2}
   m_IsPrefabParent: 0
