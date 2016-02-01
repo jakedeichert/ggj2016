@@ -7,6 +7,12 @@ public class HittableBehaviour : MonoBehaviour {
     public int maxHealth = 100;
     bool isDead;
 
+    public bool IsDead {
+        get {
+            return isDead;
+        }
+    }
+
     public void AddHealth(int healthDelta) {
         if (isDead) return;
         health += healthDelta;
@@ -15,6 +21,7 @@ public class HittableBehaviour : MonoBehaviour {
         }
         if (health <= 0) {
             health = 0;
+            isDead = true;
             SendMessage("OnDead");
         }
     }
