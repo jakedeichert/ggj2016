@@ -14,7 +14,15 @@ public class Map : MonoBehaviour{
 
     private const float SCALE_X = 2.0f, SCALE_Y = 2.0f;
 
+    private const float WALL_OFFSET = 1.28f * 1.4f;
+
     private bool full = false;
+
+    private const string
+        FLOOR_PATH = "Map/floor",
+        FLOOR_MOD_PATH = "Map/floor_mod",
+        FRONT_WALL_PATH = "Map/front_wall",
+        WALL_PATH = "Map/wall";
 
     void Start(){
         /*
@@ -66,7 +74,7 @@ public class Map : MonoBehaviour{
         int offX = (int)(Mathf.Abs(distXneg));
         int offY = (int)(Mathf.Abs(distYneg));
 
-        Debug.Log("sizeX: " + size.x + " sizeY: " + size.y);
+        //Debug.Log("sizeX: " + size.x + " sizeY: " + size.y);
 
         for (int i = 0; i < _tiles.Count; i++) {
             tiles[(int)(_tiles[i].x + offX), (int)(_tiles[i].y + offY)] = GameObject.Instantiate(basic_tile, _tiles[i], Quaternion.identity) as GameObject;
@@ -75,9 +83,9 @@ public class Map : MonoBehaviour{
             Tile t = tiles[(int)(_tiles[i].x + offX), (int)(_tiles[i].y + offY)].GetComponent<Tile>();
             t.SetGridPos((int)(_tiles[i].x + offX), (int)(_tiles[i].y + offY));
 
-            int rand = Random.Range(1, 7); //6 tiles currently
+            int rand = Random.Range(0, 9); //9 tiles currently
 
-            t.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("basic_tile0" + rand);
+            t.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(FLOOR_PATH + rand);
 
             Vector3 nu_pos = t.gameObject.transform.position;
             nu_pos.x *= SCALE_X * t.GetComponent<SpriteRenderer>().sprite.texture.width / 100.0f;
@@ -91,9 +99,9 @@ public class Map : MonoBehaviour{
 
             t.isWall = false;
 
-            //wall needs to be scaled slightyly more then floor tiles
-            //but they need to be at the same x as the floor
-            //y position of walls will need to be tweaked to look correct
+            if (Random.Range(0, 7) <= 1) {
+                AddFloorMod(t.gameObject);
+            }
         }
         for (int x = 0; x < size.x; x++) {
             for (int y = 0; y < size.y; y++) {
@@ -225,7 +233,7 @@ public class Map : MonoBehaviour{
 
         int wallT = NearTile(x, y);
 
-        tiles[x, y].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("wall" + wallT);
+        tiles[x, y].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(WALL_PATH + wallT);
 
         Vector3 nu_pos = tiles[x, y].transform.position;
         nu_pos.x *= SCALE_X * 1.28f;
@@ -248,7 +256,7 @@ public class Map : MonoBehaviour{
             flatWall.transform.localPosition = Vector2.zero;
             flatWall.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-            flatWall.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("flat_wall2");
+            flatWall.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(FRONT_WALL_PATH + "1");
 
             flatWall.transform.Translate(0.0f, -1.12f * SCALE_Y, 0.0f);
 
@@ -256,16 +264,16 @@ public class Map : MonoBehaviour{
         }
 
         //shift walls for 3D effect
-        tiles[x, y].transform.Translate(0.0f, 1.28f * 1.2f, 0.0f);
+        tiles[x, y].transform.Translate(0.0f, WALL_OFFSET, 0.0f);
 
         tiles[x, y].AddComponent<BoxCollider2D>();
-        tiles[x, y].GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, -0.78f); //hard coded offset
+        tiles[x, y].GetComponent<BoxCollider2D>().offset = new Vector2(0.0f, -WALL_OFFSET * 0.5f);
     }
     public void SpawnEmptyWall(int x, int y, int offX, int offY) {
         tiles[x, y] = GameObject.Instantiate(basic_tile, new Vector2(x - offX, y - offY), Quaternion.identity) as GameObject;
         tiles[x, y].transform.parent = this.transform;
 
-        tiles[x, y].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("empty_wall");
+        tiles[x, y].GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Map/wall_empty");
 
         Vector3 nu_pos = tiles[x, y].transform.position;
         nu_pos.x *= SCALE_X * tiles[x, y].GetComponent<SpriteRenderer>().sprite.texture.width / 100.0f;
@@ -281,6 +289,30 @@ public class Map : MonoBehaviour{
 
         tiles[x, y].GetComponent<Tile>().empty = true;
 
-        tiles[x, y].transform.Translate(0.0f, 1.28f * 1.2f, 0.0f);
+        tiles[x, y].transform.Translate(0.0f, WALL_OFFSET, 0.0f);
+    }
+
+    //currently only adds weed sprites
+    //potential for adding traps here
+    private void AddFloorMod(GameObject _floor) {
+        int mod_num = Random.Range(0, 100);
+
+        GameObject _mod = new GameObject();
+        _mod.transform.parent = _floor.transform;
+        _mod.transform.localPosition = Vector3.zero;
+        _mod.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        _mod.AddComponent<SpriteRenderer>();
+
+        //add weed
+        if (mod_num != 0) {
+            int rand = Random.Range(0, 2); //2 weeds currently
+            _mod.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(FLOOR_MOD_PATH + rand);
+
+            _mod.name = "weeds";
+        }
+        else {
+            _mod.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Map/floor_penta");
+            _mod.name = "penta";
+        }
     }
 }
